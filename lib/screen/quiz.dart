@@ -1,5 +1,7 @@
 import 'package:advance_basics/screen/home.dart';
 import 'package:advance_basics/screen/questions.dart';
+import 'package:advance_basics/screen/results_screen.dart';
+import 'package:advance_basics/utils/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class Quiz extends StatefulWidget{
 }
 
 class _QuizState extends State<Quiz>{
-  final List<String> selectedAnswers = [];
+   List<String> selectedAnswers = [];
   Widget? activeScreen;
 
   @override
@@ -22,6 +24,7 @@ class _QuizState extends State<Quiz>{
     // TODO: implement initState
     super.initState();
     activeScreen = Home(swichScreen);
+
   }
 
   void swichScreen(){
@@ -32,7 +35,12 @@ class _QuizState extends State<Quiz>{
 
   void chooseAnswer(String answers){
     selectedAnswers.add(answers);
-    print(selectedAnswers);
+    // print(selectedAnswers);
+    if(selectedAnswers.length == questions.length){
+      setState(() {
+        activeScreen = ResultsScreen(choosenAnswers: selectedAnswers,);
+      });
+    }
   }
   @override
   Widget build(BuildContext context) {
